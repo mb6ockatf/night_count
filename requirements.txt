@@ -1,0 +1,3 @@
+mysql-connector-python
+cryptography
+mysql>=0.0.3
