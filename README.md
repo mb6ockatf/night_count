@@ -10,3 +10,5 @@ Create a database first, running table.sql script. You can custom it changing th
 table's name.
 
 Add `start.bat` in list of startup programs.
+
+https://discord.gg/qe5Fus3VJ8
