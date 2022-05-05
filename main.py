@@ -1,34 +1,24 @@
 import mysql.connector
-from os import path
-from config import *
-from datetime import datetime
+from logging import basicConfig, DEBUG, info, error
+from datetime import datetime as dt
 
-time = datetime.now()
-
-
-def to_log(message, special=None):
-    with open(log_name, "a") as f:
-        f.write(str(time) + '\t' + str(message) + '\n')
-
-
-if not path.isfile(log_name):
-    with open(log_name, "w") as f:
-            f.write(str(time) + '\t' + 'Setup initialized' + '\n')
-else:
-    to_log('\n')
-    to_log(messages['start'])
+time = dt.now
+basicConfig(filename='general.log', filemode='w', encoding='utf-8',
+            level=DEBUG)
+config = {'host': '127.0.0.1', 'user': 'root', 'password': 'root',
+          'database': 'night_count'}
 try:
-    connection = mysql.connector.connect(**c)
-    to_log(messages['con'])
+    connection = mysql.connector.connect(**config)
+    info('database connected')
     with connection as conn:
         cursor = conn.cursor()
         cursor.execute("SET time_zone = '+03:00'")
-        query = f"insert into {table} values (Null, CURDATE(), CURTIME())"
+        query = f"insert into {'nightcount'} values (Null, CURDATE(), " \
+                f"CURTIME())"
         cursor.execute(query)
         connection.commit()
         cursor.close()
         connection.close()
 except Exception as ex:
-    to_log(messages['fall'])
-    print(ex)
-to_log(messages['close'])
+    error('!' + str(ex))
+info('exit')
