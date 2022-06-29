@@ -1,12 +1,10 @@
 # night_count
 
 ---
-Write to a database every time the PC is turned on
+Write to a database on startup
 
 ## Requirements
 Make sure you have a mysql server and mysql python connector installed.
-Create a database first, running table.sql script. You can customize it.
+table.sql script is for creating a table.
 
-Add `start.bat` to startup.
-
-https://discord.gg/qe5Fus3VJ8
+Add `start.bat` to startup if running on Windows system.
